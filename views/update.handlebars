@@ -1,0 +1,38 @@
+<h1>Update stock levels</h1>
+
+<a href="/addShoes">Add</a>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Size</th>
+            <th>Colour</th>
+            <th>Price</th>
+            <th>Available</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each filteredshoes}}
+        <tr>
+            <td>{{this.brand}}</td>
+            <td>{{this.size}}</td>
+            <td>{{this.colour}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.in_stock}}</td>
+            <td>
+
+                <form method="POST" action="/api/shoes/sold/:id">
+                    <input type="hidden" name="id" value="{{id}}">
+
+                    <button class="btn large" type="submit" name="plus">+</button>
+                    <button class="btn large" type="submit" name="minus">-</button>
+
+
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

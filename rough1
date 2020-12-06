@@ -1,0 +1,474 @@
+drop table colour_table;
+drop table qty_table;
+drop table  size_table;
+drop table brand_table;
+
+
+create table brand_table(
+
+    id serial not null primary key,  
+     brand text not null, 
+     price varchar not null
+     
+);
+
+create table size_table(
+
+    id serial not null primary key, 
+    size int not null,
+ foreign key (id ) references brand_table (id)
+
+);
+
+create table qty_table(
+
+    id serial not null primary key,
+    qty int not null,
+   foreign key (id) references size_table (id)
+    -- foreign key (id) references brand_table (id),
+  
+);
+
+ create table colour_table(
+    id serial not null primary key, 
+ colour text not null,
+  foreign key (id) references qty_table (id)
+--   brand text not null,
+ );
+
+ Insert into brand_table(brand, price)
+  values ('Nike',  '450');
+
+  Insert into brand_table(brand, price)
+  values ('Puma',  '675');
+
+ Insert into size_table(size)
+  values ( '6');
+
+    Insert into size_table(size)
+   values ( '6');
+
+  Insert into qty_table(qty) 
+  values ('5');
+
+   Insert into qty_table(qty) 
+  values ('5');
+
+Insert into colour_table( colour)
+ values ('white');
+
+ Insert into colour_table( colour)
+ values ('white');
+
+
+--   Insert into colour_table( colour)
+--   values ('blue');
+
+--   Insert into colour_table( colour)
+--   values ('red');
+
+--   Insert into colour_table( colour)
+--   values ('black');
+
+
+
+-- \dt
+
+-- one
+
+--  select * from size_table
+--     join brand_table   
+--       on brand_table.id = size_table.id;
+
+-- two
+--   select * from size_table
+--     join brand_table   
+--        on brand_table.id = size_table.id
+--  join  qty_table
+--     on brand_table.id = qty_table.id;
+
+-- three
+--   select * from size_table
+--     join brand_table   
+--        on brand_table.id = size_table.id
+--  join  qty_table
+--     on brand_table.id = qty_table.id
+--  join  colour_table
+--     on brand_table.id = colour_table.id;
+
+
+create table products_table(
+   id serial not null primary key,
+    productName text not null,
+   price int not null,
+    in_stock int not null,
+    size_id 
+    colour_id
+    brand_id
+    foreign_key
+
+);
+
+  select * from size_table
+    join brand_table   
+        on brand_table.id = size_table.id
+  join  qty_table
+     on brand_table.id = qty_table.id
+  join  colour_table
+     on brand_table.id = colour_table.id;
+
+
+
+        {{!-- <a href="#" class="hamburger">
+            <i class="fas fa-bars"></i>
+        </a> --}}
+
+        {{!-- <a href="#" class="phone"><i class="fas fa-phone"></i></a> --}}
+
+        <div class="logo">
+            <i class="fas fa-shoe-prints"></i>
+            <h2>Shoe are Us</h2>
+            <p>Find the right fit for you</p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="slide" data-bg="cb021c">
+                    <img src="img/shoe-1.jpg" alt="shoe-1" />
+                    <h1>Performance</h1>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="slide" data-bg="E0E1E3">
+                    <img src="img/shoe-2.jpg" alt="shoe-2" />
+                    <h1>Design</h1>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="slide" data-bg="F6F7F9">
+                    <img src="img/shoe-3.jpg" alt="shoe-3" />
+                    <h1>Comodity</h1>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="slide" data-bg="3F4346">
+                    <img src="img/shoe-4.jpg" alt="shoe-4" />
+                    <h1>Lightness</h1>
+                    <a href="#">Learn More</a>
+                </div>
+            </div>
+
+            <button id="left" class="left-arrow arrow">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="right" class="right-arrow arrow">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="progress"></div>
+        </div>
+
+
+
+
+
+
+
+        <script>
+const slides = document.querySelectorAll(".slide");
+const carousel = document.getElementById("carousel");
+const left = document.getElementById("left");
+const right = document.getElementById("right");
+
+const SLIDES_COUNT = slides.length;
+
+let current_slide = 0;
+
+left.addEventListener("click", () => {
+    current_slide--;
+    if (current_slide < 0) {
+        current_slide = SLIDES_COUNT - 1;
+    }
+
+    updateCarouse();
+});
+
+right.addEventListener("click", () => {
+    current_slide++;
+    if (current_slide > SLIDES_COUNT - 1) {
+        current_slide = 0;
+    }
+
+    updateCarouse();
+});
+
+function updateCarouse() {
+    carousel.style.transform = `translateX(${
+        -current_slide * slides[0].offsetWidth
+    }px)`;
+
+    document.body.style.background = `#${slides[current_slide].getAttribute(
+        "data-bg"
+    )}`;
+}
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #cb021c;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    transition: background 0.4s ease-in-out;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.hamburger {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    font-size: 3rem;
+}
+
+.phone {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    font-size: 3rem;
+}
+
+.logo {
+    color: white;
+    font-size: 1.7rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.logo i {
+    font-size: 3rem;
+}
+
+.logo h2 {
+    font-weight: normal;
+    margin: 0;
+}
+
+.logo p {
+    color: #1f1f1f;
+    font-weight: bold;
+    margin: 0;
+}
+
+.carousel-container {
+    overflow: hidden;
+    position: relative;
+    height: 60vh;
+    width: 100vw;
+    margin-top: 10rem;
+}
+
+.carousel {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(0);
+    transition: transform 0.4s ease-in-out;
+}
+
+.slide {
+    width: 100vw;
+    text-align: center;
+}
+
+.slide img {
+    object-fit: cover;
+    height: 400px;
+    width: 400px;
+}
+
+.slide h1 {
+    color: white;
+    font-size: 4rem;
+    margin-top: -2rem;
+}
+
+.slide a {
+    background-color: #1f1f1f;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+}
+
+.arrow {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    color: black;
+    opacity: 0.5;
+}
+
+.left-arrow {
+    left: 2rem;
+}
+
+.right-arrow {
+    right: 2rem;
+}
+
+app.get("/api/shoes/brand/:brandname/size/:sizename", async function (req, res) {
+
+  
+  let brandName = req.params.brandname;
+console.log(brandName);
+
+let sizeLength = req.params.sizename;
+  console.log(sizeLength);
+
+  var combinedData = await instance.allByBrandAndSize(brandName, sizeLength)
+  // console.log(sizeLength);
+  // console.log(brandName);
+
+  console.log(combinedData);
+  res.json(combinedData)
+
+});
+
+/api/shoes/:brand:size
+
+
+async function add(req, res) {
+		try {
+			let input = req.body;
+			await categoryService.add(input);
+			res.json({
+				status: 'success',
+				data: categories
+			});
+		}
+		catch (err) {
+			res.json({
+				status: "error",
+				error: err.stack
+			});
+		}
+	};
+
+
+
+  async function get(req, res) {
+		try {
+			var id = req.params.id;
+			let result = await categoryService.get(id);
+			res.json({
+				status: 'success',
+				data: result.rows[0]
+			});
+		}
+		catch (err) {
+			res.json({
+				status: "error",
+				error: err.stack
+			});
+		}
+	};
+
+	async function update(req, res) {
+
+		try {
+			const data = req.body;
+			const id = req.params.id;
+			const description = data.description;
+
+			await categoryService.update({
+				id,
+				description
+			})
+			res.json({
+				status: 'success'
+			});
+		}
+		catch (err) {
+			res.json({
+				status: "error",
+				error: err.stack
+			});
+		}
+
+	};
+
+	async function deleteOne(req, res) {
+		try{
+			const id = req.params.id;
+			await categoryService.delete(id);
+			res.json({
+				status: 'success'
+			});
+		}
+		catch(err){
+			res.json({
+				status: "error",
+				error: err.stack
+			});
+		}
+	};
+
+	return {
+		add,
+		delete: deleteOne,
+		update,
+		get,
+		all
+	}
+}
+
+
+app.get("/api/shoes/brand", async function (req, res) {
+
+  //  let brandName = req.params.brandName;
+
+  var data = await instance.allShoesByBrand()
+  //console.log(data)
+  res.json(data)
+
+});
+
+app.get("/api/shoes/size", async function (req, res) {
+
+  //  let brandName = req.params.brandName;
+
+  var data = await instance.allShoesBySize()
+  //console.log(data)
+  res.json(data)
+
+});
+
+
+http://localhost:3001/api/shoes/
+http://localhost:3001/api/shoes/brand/Nike
+http://localhost:3001/api/shoes/size/6
+http://localhost:3001/api/shoes/brand/Nike/size/6

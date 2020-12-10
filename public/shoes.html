@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/shoes.css">
+    <link rel="stylesheet" href="/css/simple-grid.css">
+
+    <H1 class="center ">shoes are us</H1>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"
+        integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
+    <!-- handlebars link call -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js"
+        integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
+
+    <script type="text/x-script" class="filteredCarsTemplate">
+		<table>
+			<tr>
+
+			<th>Brand</th>
+			<th>Size</th>
+			<th>Colour</th>
+	    <th>Price</th>
+    	<th>Available</th>
+
+			</tr>
+{{#each filteredshoes}}
+
+<tr>
+<td>{{this.brand}}</td>
+<td>{{this.size}}</td>
+<td>{{this.colour}}</td>
+<td>{{this.price}}</td>
+<td>{{this.in_stock}}</td>
+</tr>
+{{/each}}
+
+</table>
+</script>
+</head>
+
+<body>
+    <div class="slideshow-container">
+
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img width="528px" height="352px" src="img/shoe-4.jpg" style="width:100%">
+            <div class="text">Adidas</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img width="547px" height="365px" src="img/shoe-1.jpg" style="width:100%">
+            <div class="text">Nike</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img width="499px" height="333px" src="img/leon-seibert-G5flBvvgZvE-unsplash.jpg" style="width:100%">
+            <div class="text">Puma</div>
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br>
+
+    <!-- The dots/circles -->
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+    <span>
+        <button class="filterBtn" type="submit">filter</button>
+
+    </span>
+
+
+    <div class="dropdown left">
+        <button onclick="myFunctionA()" class="dropbtn">Brand</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#">Nike</a>
+            <a href="#">Puma</a>
+            <a href="#">Adidas</a>
+        </div>
+    </div>
+
+    <div class="dropdown left">
+        <button onclick="myFunctionB()" class="dropbtn">Size</button>
+        <div id="myDropdown2" class="dropdown-content">
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">9</a>
+        </div>
+    </div>
+    <div class="dropdown left">
+        <button onclick="myFunctionC()" class="dropbtn">All</button>
+        <div id="myDropdown3" class="dropdown-content">
+            <a href="#">All</a>
+        </div>
+
+    </div>
+
+    <div class="center">
+        <h2>Available Shoes</h2>
+
+        <div class="filteredCars">
+
+            <ul class="filteredCarsList"></ul>
+
+        </div>
+
+    </div>
+    </div>
+
+
+</body>
+
+
+<script src="filter.js"></script>
+<script src="shoes-function.js"></script>
+<script src="dropbox.js"></script>
+
+<script></script>
+
+
+
+
+
+ </html>

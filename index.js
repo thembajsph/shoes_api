@@ -5,10 +5,8 @@ const exphbs = require('express-handlebars');
 // //get body parser / instantiate
 const bodyParser = require('body-parser');
 
-
-
 //require the settings bill factory function
-const shoes = require("./shoes");
+const shoes = require("./public/shoes");
 const api = require('./api');
 
 // create an instance for the app, instantiate it.
@@ -93,16 +91,14 @@ app.get("/AddShoes", async function (req, res) {
 
 });
 
-app.get("/AddShoes", async function (req, res) {
+app.get("/checkoutShoes", async function (req, res) {
 
 
-  res.render("shoes", {
+  res.render("checkout", {
 
   });
 
 });
-
-
 
 
 

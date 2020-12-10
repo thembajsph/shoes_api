@@ -472,3 +472,160 @@ http://localhost:3001/api/shoes/
 http://localhost:3001/api/shoes/brand/Nike
 http://localhost:3001/api/shoes/size/6
 http://localhost:3001/api/shoes/brand/Nike/size/6
+
+
+
+app.get('/api/users', (req, res) => {
+  const users = [
+    {
+      name: 'Thabang', age: 3, friends: []
+    }, {
+      name: 'Jane', age: 23, friends: [ {friendId: 2}]
+    },{
+      name: 'Thabiso', age: 31, friends: []
+    }
+  ]
+
+
+  res.send(users)
+})
+
+
+app.get('/api/players', (req, res) => {
+  const players =  [
+    {
+        Id: 1,   playername: 'Thabang', signname: 3, tm_model_tag: 2 , player_score: 3
+    }, {
+        Id: 2,  playername: 'Jane', signname: 23, tm_model_tag: 3, player_score: 3
+    },{
+        Id: 3,  playername: 'Thabiso', signname: 31, tm_model_tag: 1, player_score: 2
+    },{
+        Id: 4,  playername: 'Sipho', signname: 31, tm_model_tag: 2, player_score: 1
+    },
+
+  ]
+
+
+  res.send(players)
+})
+
+
+
+
+
+app.post('/api/users', (req, res)=> {
+  const data = req.body;
+  console.log({data})
+  res.send({status:200})
+})
+
+
+app.post('/api/players', (req, res)=> {
+  const data = req.body;
+
+  console.log({data})
+  res.send({status:200})
+})
+
+
+let list = document.querySelector('.listPlayersTemplate');
+var template = Handlebars.compile(list.innerText)
+
+const display = document.querySelector('.list')
+
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+
+
+axios.get('/api/users').then(result => {
+    console.log(result.data)
+
+    display.innerHTML = template({users: result.data})
+
+
+}).catch(err => console.log(err))
+
+const u = {
+    name: 'Thabang', signname: 3, friends: []
+  }
+
+
+
+  
+function addData() {
+
+axios.post('api/players', u).then(result => {
+    console.log(result.data)
+}).catch(err => console.log(err))
+
+}
+
+const players =  [
+    {
+        Id: 1,   playername: 'Thabang', signname: 3, tm_model_tag: 2 , player_score: 3
+    }, {
+        Id: 2,  playername: 'Jane', signname: 23, tm_model_tag: 3, player_score: 3
+    },{
+        Id: 3,  playername: 'Thabiso', signname: 31, tm_model_tag: 1, player_score: 2
+    },{
+        Id: 4,  playername: 'Sipho', signname: 31, tm_model_tag: 2, player_score: 1
+    },
+
+  ]
+
+
+  axios.get('/api/players').then(result => {
+    console.log(result.data)
+
+    display.innerHTML = template({players: result.data})
+
+
+}).catch(err => console.log(err))
+
+  function addPlayer() {
+
+    axios.post('api/users', players).then(result => {
+        console.log(result.data)
+    }).catch(err => console.log(err))
+    
+    }
+
+//index.html 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js" integrity="sha512-90vH1Z83AJY9DmlWa8WkjkV79yfS2n2Oxhsi2dZbIv0nC4E6m5AbH8Nh156kkM7JePmqD6tcZsfad1ueoaovww==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/taxi.css">
+    <link rel="stylesheet" href="./css/simple-grid.css">
+    <title>Taxi sign App</title>
+
+
+    <H1 class="center ">Taxi sign App</H1>
+    <script language="text/x-template" class="listPlayersTemplate">
+        {{#each users}}
+        
+        <li>{{this.name}}
+            
+            </li>
+        
+        {{/each}}
+        
+        </script>
+</head>
